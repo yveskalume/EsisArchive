@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "243034071877",
+    "project_id": "esisarchive",
+    "storage_bucket": "esisarchive.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243034071877:android:8b07bd47272e99bd59942c",
+        "android_client_info": {
+          "package_name": "tech.devscast.esisarchive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243034071877-tf2bq9el5q0dc0e5c1ldqi2ornjaobsa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlw-rpQE_t5dZfs63-aa2k4rmmfOQATuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243034071877-tf2bq9el5q0dc0e5c1ldqi2ornjaobsa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
