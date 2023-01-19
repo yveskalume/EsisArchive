@@ -16,3 +16,4 @@ val Black100 = Color(0xFF212121)
 
 val Gray200 = Color(0xFF757575)
 val Gray100 = Color(0xFFBDBDBD)
+val Gray002 = Color.LightGray.copy(alpha = 0.2f)

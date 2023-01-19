@@ -21,7 +21,11 @@ fun PromotionChip(
 		val color by animateColorAsState(
 				targetValue = if (isChecked) MaterialTheme.colors.primary else Color.White
 		)
+
+		val textColor by animateColorAsState(
+				targetValue = if (isChecked) Color.White else Color.Black
+		)
 		Chip(onClick = onClick, colors = ChipDefaults.chipColors(backgroundColor = color)) {
-				Text(text = promotion.name)
+				Text(text = promotion.name, color = textColor)
 		}
 }

@@ -18,8 +18,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import tech.devscast.esisarchive.ui.navigation.BottomNavigationItems
 import tech.devscast.esisarchive.ui.navigation.Route
-import tech.devscast.esisarchive.ui.screen.downloaded.DownloadedScreen
 import tech.devscast.esisarchive.ui.screen.course.CourseScreen
+import tech.devscast.esisarchive.ui.screen.home.HomeScreen
+import tech.devscast.esisarchive.ui.screen.upload.UploadCourseScreen
 import tech.devscast.esisarchive.ui.theme.EsisArchiveTheme
 
 @Composable
@@ -53,12 +54,17 @@ fun RootScreen() {
 						startDestination = Route.Home.value
 				) {
 						composable(route = Route.Home.value) {
+								HomeScreen(navController = navController)
+						}
+
+						composable(route = Route.Course.value) {
 								CourseScreen()
 						}
 
-						composable(route = Route.Downloaded.value) {
-								DownloadedScreen()
+						composable(route = Route.Upload.value) {
+								UploadCourseScreen()
 						}
+
 				}
 		}
 }
