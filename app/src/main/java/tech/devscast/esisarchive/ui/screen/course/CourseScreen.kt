@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -29,11 +27,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import tech.devscast.esisarchive.ui.components.CourseItem
 import tech.devscast.esisarchive.ui.theme.EsisArchiveTheme
 
 @Composable
 fun CourseScreen(
+		navController: NavController,
 		viewModel: CourseViewModel = viewModel()
 ) {
 		val homeUiState by viewModel.courseUiState.collectAsState()
@@ -47,7 +48,7 @@ fun CourseScreen(
 						TopAppBar(
 								backgroundColor = MaterialTheme.colors.surface,
 								navigationIcon = {
-										IconButton(onClick = { /*TODO*/ }) {
+										IconButton(onClick = { navController.navigateUp() }) {
 												Icon(imageVector = Icons.Rounded.ArrowBackIos, contentDescription = null)
 										}
 								},
@@ -72,11 +73,10 @@ fun CourseScreen(
 												CircularProgressIndicator()
 										}
 										is CourseUiState.Success -> {
-												LazyVerticalGrid(
-														contentPadding = PaddingValues(8.dp),
+												LazyColumn(
+														modifier = Modifier.fillMaxSize(),
+														contentPadding = PaddingValues(16.dp),
 														verticalArrangement = Arrangement.spacedBy(8.dp),
-														horizontalArrangement = Arrangement.spacedBy(8.dp),
-														columns = GridCells.Fixed(2),
 														content = {
 																items(state.courses) { course ->
 																		CourseItem(
@@ -99,6 +99,6 @@ fun CourseScreen(
 @Composable
 fun CourseScreenPreview() {
 		EsisArchiveTheme {
-				CourseScreen()
+				CourseScreen(navController = rememberNavController())
 		}
 }

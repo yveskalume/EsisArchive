@@ -75,11 +75,6 @@ fun UploadCourseScreen(viewModel: UploadCourseViewModel = viewModel()) {
 				topBar = {
 						TopAppBar(
 								backgroundColor = MaterialTheme.colors.surface,
-								navigationIcon = {
-										IconButton(onClick = { /*TODO*/ }) {
-												Icon(imageVector = Icons.Rounded.ArrowBackIos, contentDescription = null)
-										}
-								},
 								title = {
 										Text(text = "Nouveau syllabus")
 								},
