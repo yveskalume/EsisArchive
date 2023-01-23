@@ -1,6 +1,7 @@
 package tech.devscast.esisarchive.ui.screen.root
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -13,15 +14,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import tech.devscast.esisarchive.ui.navigation.BottomNavigationItems
 import tech.devscast.esisarchive.ui.navigation.Route
+import tech.devscast.esisarchive.ui.screen.auth.SignInScreen
+import tech.devscast.esisarchive.ui.screen.auth.SignInUpScreen
 import tech.devscast.esisarchive.ui.screen.course.CourseScreen
 import tech.devscast.esisarchive.ui.screen.home.HomeScreen
 import tech.devscast.esisarchive.ui.screen.upload.UploadCourseScreen
 import tech.devscast.esisarchive.ui.theme.EsisArchiveTheme
+import tech.devscast.esisarchive.util.composable
 
 @Composable
 fun RootScreen() {
@@ -49,19 +52,29 @@ fun RootScreen() {
 				}
 		) { contentPadding ->
 				NavHost(
-						modifier = Modifier.padding(contentPadding),
+						modifier = Modifier
+								.padding(contentPadding)
+								.safeContentPadding(),
 						navController = navController,
-						startDestination = Route.Home.value
+						startDestination = Route.SignIn.value
 				) {
-						composable(route = Route.Home.value) {
+						composable(route = Route.SignIn) {
+								SignInScreen(navController = navController)
+						}
+
+						composable(route = Route.SignUp) {
+								SignInUpScreen(navController = navController)
+						}
+
+						composable(route = Route.Home) {
 								HomeScreen(navController = navController)
 						}
 
-						composable(route = Route.Course.value) {
+						composable(route = Route.Course) {
 								CourseScreen(navController = navController)
 						}
 
-						composable(route = Route.Upload.value) {
+						composable(route = Route.Upload) {
 								UploadCourseScreen()
 						}
 

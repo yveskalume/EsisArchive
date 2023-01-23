@@ -2,11 +2,28 @@ package tech.devscast.esisarchive.util
 
 import android.database.Cursor
 import android.provider.OpenableColumns
+import androidx.compose.runtime.Composable
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavDeepLink
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.ComposeNavigator
+import androidx.navigation.compose.composable
+import androidx.navigation.get
 import tech.devscast.esisarchive.ui.navigation.Route
 
 fun NavController.navigate(route: Route) {
 		navigate(route.value)
+}
+
+fun NavGraphBuilder.composable(
+		route: Route,
+		arguments: List<NamedNavArgument> = emptyList(),
+		deepLinks: List<NavDeepLink> = emptyList(),
+		content: @Composable (NavBackStackEntry) -> Unit
+) {
+		composable(route.value, arguments, deepLinks, content)
 }
 
 fun Cursor.getFileNameAndSize(): Pair<String, String> {
