@@ -1,6 +1,10 @@
 package tech.devscast.esisarchive.util
 
+import android.app.DownloadManager
+import android.content.Context
 import android.database.Cursor
+import android.net.Uri
+import android.os.Environment
 import android.provider.OpenableColumns
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
@@ -50,4 +54,17 @@ fun Long.formatedFileSize(): String {
 		} else {
 				"${ this / 1024} KB"
 		}
+}
+
+fun Context.downloadFile(link: String, filePath: String): Long {
+		val request = DownloadManager.Request(Uri.parse(link))
+		val params = DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE
+		request.setAllowedNetworkTypes(params)
+				.setTitle("My esis")
+				.setDescription("Fichier en cours de téléchargement")
+				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+				.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filePath)
+		val manager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+
+		return manager.enqueue(request)
 }

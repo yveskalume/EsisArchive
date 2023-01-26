@@ -8,10 +8,11 @@ data class Course(
 		val author: String = "",
 		val fileUrl: String = "",
 		val downloads: Int = 0,
+		val fileSize: String = "",
 		val userUid: String = "",
 		val createdAt: Date? = null,
 		val updatedAt: Date? = null,
-		val promotion: Promotion,
+		val promotion: Promotion = Promotion.L1,
 		val tags: List<Tag> = emptyList(),
 		val validated: Boolean = false
 )
