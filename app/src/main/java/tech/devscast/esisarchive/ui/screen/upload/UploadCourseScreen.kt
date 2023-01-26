@@ -122,6 +122,10 @@ private fun UploadScreenContent(modifier: Modifier = Modifier, onSubmit: (Course
 				mutableStateOf(null)
 		}
 
+		var fileSize by remember {
+				mutableStateOf("")
+		}
+
 		var isValidForm by remember {
 				mutableStateOf(false)
 		}
@@ -142,6 +146,9 @@ private fun UploadScreenContent(modifier: Modifier = Modifier, onSubmit: (Course
 
 				FilePickerItem(
 						fileUri = fileUri,
+						onFileSizeChange = {
+								fileSize = it
+						},
 						onClick = { pdfIntentLauncher.launch("application/pdf") }
 				)
 				OutlinedTextField(
@@ -189,6 +196,7 @@ private fun UploadScreenContent(modifier: Modifier = Modifier, onSubmit: (Course
 										author = author,
 										downloads = 0,
 										userUid = "",
+										fileSize = fileSize,
 										createdAt = Date(),
 										updatedAt = Date(),
 										promotion = selectedPromotion!!,

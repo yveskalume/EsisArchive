@@ -36,7 +36,12 @@ import androidx.compose.ui.unit.dp
 import tech.devscast.esisarchive.util.getFileNameAndSize
 
 @Composable
-fun FilePickerItem(modifier: Modifier = Modifier, fileUri: Uri?, onClick: () -> Unit) {
+fun FilePickerItem(
+		modifier: Modifier = Modifier,
+		fileUri: Uri?,
+		onFileSizeChange: (String) -> Unit,
+		onClick: () -> Unit
+) {
 		val context = LocalContext.current
 
 		var fileName: String? by remember {
@@ -58,6 +63,7 @@ fun FilePickerItem(modifier: Modifier = Modifier, fileUri: Uri?, onClick: () -> 
 						)
 						fileName = cursor?.getFileNameAndSize()?.first
 						fileSize = cursor?.getFileNameAndSize()?.second
+						onFileSizeChange(fileSize.toString())
 						cursor?.close()
 				} else {
 						fileName = null
