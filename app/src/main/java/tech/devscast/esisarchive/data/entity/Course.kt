@@ -11,7 +11,7 @@ data class Course(
 		val userUid: String = "",
 		val createdAt: Date? = null,
 		val updatedAt: Date? = null,
-		val promotion: Promotion = Promotion.ALL,
+		val promotion: Promotion,
 		val tags: List<Tag> = emptyList(),
 		val validated: Boolean = false
 )

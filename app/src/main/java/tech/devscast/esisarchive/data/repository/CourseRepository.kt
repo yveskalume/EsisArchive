@@ -7,6 +7,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.tasks.await
 import tech.devscast.esisarchive.data.entity.Course
 import tech.devscast.esisarchive.data.util.Result
@@ -43,5 +44,24 @@ class CourseRepository {
 						}
 				}
 				awaitClose { subscription.remove() }
+		}
+
+		fun getAlByPromotion(promotion: String) = callbackFlow {
+				val courseCollection = fireStore.collection("courses")
+				val subscription = courseCollection
+						.whereEqualTo(Course::promotion.name,promotion)
+						.addSnapshotListener { value, error ->
+						if (error != null || value == null) {
+								trySend(Result.Error(error?.message.toString()))
+								return@addSnapshotListener
+						}
+
+						value.toObjects<Course>().also { data ->
+								trySend(Result.Success(data))
+						}
+				}
+				awaitClose { subscription.remove() }
+		}.catch {
+				emit(Result.Error(it.localizedMessage ?: "Une erreur est survenue"))
 		}
 }

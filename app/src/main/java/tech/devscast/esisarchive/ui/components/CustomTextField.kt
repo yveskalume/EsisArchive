@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import tech.devscast.esisarchive.ui.theme.EsisArchiveTheme
@@ -31,6 +32,7 @@ fun CustomTextField(
 		placeholder: @Composable (() -> Unit)? = null,
 		leadingIcon: @Composable (() -> Unit)? = null,
 		trailingIcon: @Composable (() -> Unit)? = null,
+		visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
 		OutlinedTextField(
 				value = value,
@@ -40,7 +42,8 @@ fun CustomTextField(
 				trailingIcon = trailingIcon,
 				leadingIcon = leadingIcon,
 				colors = TextFieldDefaults.outlinedTextFieldColors(unfocusedBorderColor = Gray004),
-				modifier = modifier
+				modifier = modifier,
+				visualTransformation = visualTransformation
 		)
 }
 
@@ -52,7 +55,8 @@ fun CustomTextField(
 		placeholder: @Composable (() -> Unit)? = null,
 		leadingIcon: @Composable (() -> Unit)? = null,
 		trailingIcon: @Composable (() -> Unit)? = null,
-		colors: TextFieldColors = TextFieldDefaults.textFieldColors()
+		colors: TextFieldColors = TextFieldDefaults.textFieldColors(),
+		visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
 		OutlinedTextField(
 				value = value,
@@ -62,7 +66,8 @@ fun CustomTextField(
 				colors = colors,
 				modifier = modifier,
 				leadingIcon = leadingIcon,
-				trailingIcon = trailingIcon
+				trailingIcon = trailingIcon,
+				visualTransformation = visualTransformation
 		)
 }
 

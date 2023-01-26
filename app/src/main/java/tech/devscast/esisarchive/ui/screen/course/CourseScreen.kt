@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIos
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -35,11 +36,16 @@ import tech.devscast.esisarchive.ui.theme.EsisArchiveTheme
 @Composable
 fun CourseScreen(
 		navController: NavController,
+		promotion: String,
 		viewModel: CourseViewModel = viewModel()
 ) {
 		val homeUiState by viewModel.courseUiState.collectAsState()
 
 		val scaffoldState = rememberScaffoldState()
+
+		LaunchedEffect(promotion) {
+				viewModel.getCourses(promotion)
+		}
 
 
 		Scaffold(
@@ -53,7 +59,7 @@ fun CourseScreen(
 										}
 								},
 								title = {
-										Text(text = "Syllabus")
+										Text(text = promotion)
 								},
 						)
 				},
@@ -66,7 +72,7 @@ fun CourseScreen(
 				) {
 						Crossfade(targetState = homeUiState) { state ->
 								when (state) {
-										is CourseUiState.Error -> {
+										is CourseUiState.Failure -> {
 												Text(text = state.message)
 										}
 										CourseUiState.Loading -> {
@@ -99,6 +105,6 @@ fun CourseScreen(
 @Composable
 fun CourseScreenPreview() {
 		EsisArchiveTheme {
-				CourseScreen(navController = rememberNavController())
+				CourseScreen(navController = rememberNavController(), promotion = "L1")
 		}
 }

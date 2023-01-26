@@ -8,13 +8,18 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.composable
 import androidx.navigation.get
 import tech.devscast.esisarchive.ui.navigation.Route
 
-fun NavController.navigate(route: Route) {
-		navigate(route.value)
+fun NavController.navigate(route: Route,builder: (NavOptionsBuilder.() -> Unit)? = null) {
+		if (builder != null) {
+				navigate(route.value,builder)
+		} else {
+				navigate(route.value)
+		}
 }
 
 fun NavGraphBuilder.composable(

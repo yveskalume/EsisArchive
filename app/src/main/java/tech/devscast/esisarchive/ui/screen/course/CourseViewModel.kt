@@ -2,10 +2,9 @@ package tech.devscast.esisarchive.ui.screen.course
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import tech.devscast.esisarchive.data.repository.CourseRepository
 import tech.devscast.esisarchive.data.util.Result
 
@@ -13,15 +12,26 @@ class CourseViewModel : ViewModel() {
 
 		private val courseRepository = CourseRepository()
 
+		private val _courseUiState: MutableStateFlow<CourseUiState> =
+				MutableStateFlow(CourseUiState.Loading)
+		val courseUiState: StateFlow<CourseUiState>
+				get() = _courseUiState
 
-		val courseUiState: StateFlow<CourseUiState> = courseRepository.getAll().map { result ->
-				when (result) {
-						is Result.Error -> CourseUiState.Error(result.message)
-						is Result.Success -> CourseUiState.Success(result.data)
+		fun getCourses(promotion: String) {
+				viewModelScope.launch {
+						_courseUiState.emit(CourseUiState.Loading)
+						courseRepository.getAlByPromotion(promotion).collect {
+								when (it) {
+										is Result.Error -> {
+												_courseUiState.emit(CourseUiState.Failure(it.message))
+										}
+										is Result.Success -> {
+												_courseUiState.emit(CourseUiState.Success(it.data))
+										}
+								}
+						}
+
 				}
-		}.stateIn(
-				scope = viewModelScope,
-				started = SharingStarted.WhileSubscribed(5000),
-				initialValue = CourseUiState.Loading
-		)
+		}
+
 }
