@@ -1,6 +1,5 @@
 package tech.devscast.esisarchive.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,18 +25,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import tech.devscast.esisarchive.R
 import tech.devscast.esisarchive.data.entity.Course
+import tech.devscast.esisarchive.data.entity.Promotion
 import tech.devscast.esisarchive.ui.theme.EsisArchiveTheme
 import tech.devscast.esisarchive.ui.theme.Gray002
 
 @Composable
-fun CourseItem(modifier: Modifier = Modifier,course: Course,onClick: () -> Unit) {
+fun CourseItem(modifier: Modifier = Modifier, course: Course, onClick: () -> Unit) {
 
 		Row(
 				verticalAlignment = Alignment.CenterVertically,
@@ -92,6 +88,11 @@ fun CourseItem(modifier: Modifier = Modifier,course: Course,onClick: () -> Unit)
 @Composable
 fun CourseItemPreview() {
 		EsisArchiveTheme {
-				CourseItem(course = Course(title = "Lorem ipsum", author = "Musumbu kaninda"), onClick = {})
+				CourseItem(
+						course = Course(
+								title = "Lorem ipsum",
+								author = "Musumbu kaninda",
+								promotion = Promotion.L1
+						), onClick = {})
 		}
 }

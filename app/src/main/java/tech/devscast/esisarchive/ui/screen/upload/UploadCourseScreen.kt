@@ -20,7 +20,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBackIos
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import java.util.Date
 import java.util.UUID
 import tech.devscast.esisarchive.data.entity.Course
@@ -43,7 +44,10 @@ import tech.devscast.esisarchive.ui.screen.upload.logic.UploadCourseViewModel
 import tech.devscast.esisarchive.ui.screen.upload.logic.UploadSideEffect
 
 @Composable
-fun UploadCourseScreen(viewModel: UploadCourseViewModel = viewModel()) {
+fun UploadCourseScreen(
+		navController: NavController,
+		viewModel: UploadCourseViewModel = viewModel()
+) {
 
 		val uploadSideEffect by viewModel.courseUiEffect.collectAsState(initial = UploadSideEffect.Initial)
 
@@ -75,6 +79,11 @@ fun UploadCourseScreen(viewModel: UploadCourseViewModel = viewModel()) {
 				topBar = {
 						TopAppBar(
 								backgroundColor = MaterialTheme.colors.surface,
+								navigationIcon = {
+										IconButton(onClick = { navController.navigateUp() }) {
+												Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = null)
+										}
+								},
 								title = {
 										Text(text = "Nouveau syllabus")
 								},

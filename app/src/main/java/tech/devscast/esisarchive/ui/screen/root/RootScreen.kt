@@ -33,7 +33,7 @@ fun RootScreen() {
 				}
 
 				composable(route = Route.Upload.value) {
-						UploadCourseScreen()
+						UploadCourseScreen(navController = navController)
 				}
 
 		}

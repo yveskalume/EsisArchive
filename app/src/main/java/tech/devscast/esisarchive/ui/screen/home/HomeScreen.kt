@@ -19,11 +19,13 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import tech.devscast.esisarchive.R
 import tech.devscast.esisarchive.data.entity.Promotion
 import tech.devscast.esisarchive.ui.components.CategoryItem
 import tech.devscast.esisarchive.ui.navigation.Route
@@ -37,7 +39,7 @@ fun HomeScreen(navController: NavController) {
 						TopAppBar(
 								backgroundColor = Color.White,
 								title = {
-										Text(text = "My Esis")
+										Text(text = "Archives")
 								},
 								actions = {
 										IconButton(onClick = { navController.navigate(Route.Upload) }) {
@@ -54,9 +56,9 @@ fun HomeScreen(navController: NavController) {
 				) {
 						item {
 								Text(
-										text = "Resources Academiques",
+										text = "Syllabus",
 										style = MaterialTheme.typography.h3,
-										fontWeight = FontWeight.SemiBold
+										fontWeight = FontWeight.Light
 								)
 						}
 						items(Promotion.values()) {

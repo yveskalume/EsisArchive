@@ -17,6 +17,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowBackIos
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -55,7 +56,7 @@ fun CourseScreen(
 								backgroundColor = MaterialTheme.colors.surface,
 								navigationIcon = {
 										IconButton(onClick = { navController.navigateUp() }) {
-												Icon(imageVector = Icons.Rounded.ArrowBackIos, contentDescription = null)
+												Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = null)
 										}
 								},
 								title = {
@@ -76,7 +77,12 @@ fun CourseScreen(
 												Text(text = state.message)
 										}
 										CourseUiState.Loading -> {
-												CircularProgressIndicator()
+												Box(
+														modifier = Modifier.fillMaxSize(),
+														contentAlignment = Alignment.Center
+												) {
+														CircularProgressIndicator()
+												}
 										}
 										is CourseUiState.Success -> {
 												LazyColumn(

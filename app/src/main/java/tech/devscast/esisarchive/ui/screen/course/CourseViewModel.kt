@@ -20,17 +20,20 @@ class CourseViewModel : ViewModel() {
 		fun getCourses(promotion: String) {
 				viewModelScope.launch {
 						_courseUiState.emit(CourseUiState.Loading)
-						courseRepository.getAlByPromotion(promotion).collect {
-								when (it) {
-										is Result.Error -> {
-												_courseUiState.emit(CourseUiState.Failure(it.message))
-										}
-										is Result.Success -> {
-												_courseUiState.emit(CourseUiState.Success(it.data))
+						try {
+								courseRepository.getAlByPromotion(promotion).collect {
+										when (it) {
+												is Result.Error -> {
+														_courseUiState.emit(CourseUiState.Failure(it.message))
+												}
+												is Result.Success -> {
+														_courseUiState.emit(CourseUiState.Success(it.data))
+												}
 										}
 								}
+						} catch (e: Exception) {
+								_courseUiState.emit(CourseUiState.Failure(e.message.toString()))
 						}
-
 				}
 		}
 
